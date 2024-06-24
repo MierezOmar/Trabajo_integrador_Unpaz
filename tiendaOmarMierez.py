@@ -169,7 +169,7 @@ def forma_pago():
         cuotas = None
         if medio_de_pago == 'Tarjeta de credito':
             tarjeta = input("\nIngresa la tarjeta del Cliente: ").upper()
-            cuotas = int(input("\nIngresa el número de cuotas (3, 6, 12): "))    
+            cuotas = int(input("\nIngresa el número de cuotas (1,3, 6, 12): "))    
         return dia_semana, medio_de_pago, tarjeta, cuotas
 
     def pago_final(total_general, dia_semana, medio_de_pago, tarjeta=None, cuotas=None):
@@ -180,7 +180,9 @@ def forma_pago():
         elif medio_de_pago == 'Tarjeta de credito':
             descuento = descuentos_tarjeta_dia.get(dia_semana, {}).get(tarjeta, 0)
             total_general *= (1 - descuento)
-            if cuotas == 3:
+            if cuotas == 1:
+                total_general *= 1.00
+            elif cuotas == 3:
                 total_general *= 1.12 
             elif cuotas == 6:
                 total_general *= 1.18  
@@ -223,7 +225,7 @@ while True:
     sesion= input("\nINGRESE CONTRASEÑA PARA INICIAR SESION: ")
 
     if contraGenerada == sesion:
-        print ("\n ********** USTED A INISIADO SESSION **********")
+        print ("\n ********** USTED A INISIADO SESION **********")
         actividad_tienda()
         break
     else:
