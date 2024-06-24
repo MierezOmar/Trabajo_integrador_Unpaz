@@ -78,29 +78,39 @@ carrito = []
 def agregarAlCarrito():
     print("\n*******CATEGORIAS*******")
     for i in range(len(product)):
-        print(product[i])
-    categoria = input("Introduce la categoría del producto: ").title()
+        print(f"\n•{product[i]}")
+    categoria = input("\nIntroduce la categoría del producto: ").title()
     if categoria in productos:
         listarProductosYprecios(categoria)
-        detalle = input("Introduce el detalle del producto que deseas agregar: ").lower()
+        detalle = input("\nIntroduce el detalle del producto que deseas agregar: ").lower()
         if detalle in productos[categoria]["detalles"]:
             indice = productos[categoria]["detalles"].index(detalle)
             precio = productos[categoria]["precios"][indice]
-            cantidad = int(input("Introduce la cantidad que deseas agregar: "))
-            producto_encontrado = False
-            for producto in carrito:
-                if producto['detalle'] == detalle:
-                    producto['cantidad'] += cantidad
-                    print(f"\nActualizaste la cantidad de {detalle} en el carrito.")
-                    producto_encontrado = True
-                    break
-            if not producto_encontrado:
-                carrito.append({'detalle': detalle, 'cantidad': cantidad, 'precio': precio})
-                print(f"\nAgregaste {cantidad} de {detalle} al carrito.")
-            for producto in carrito:
-                print(f"\nDetalle: {producto['detalle']}, Cantidad: {producto['cantidad']}, Precio: ${producto['precio']}")
+            while True:
+                cantidad = int(input("\nIntroduce la cantidad que deseas agregar: "))
+                producto_encontrado = False
+                if cantidad > 0:
+                    for producto in carrito:
+                        if producto['detalle'] == detalle:
+                            producto['cantidad'] += cantidad
+                            print(f"\nActualizaste la cantidad de {detalle} en el carrito.")
+                            producto_encontrado = True
+                            break
+                    if not producto_encontrado:
+                        carrito.append({'detalle': detalle, 'cantidad': cantidad, 'precio': precio})
+                        print(f"\nAgregaste {cantidad} de {detalle} al carrito.")
+                    for producto in carrito:
+                        print(f"\nDetalle: {producto['detalle']}, Cantidad: {producto['cantidad']}, Precio: ${producto['precio']}")
+                else:
+                    contador = 1
+                    if contador != 5: 
+                        print("\n**** La cantidad debe ser entero positivo ****")
+                        contador += 1
+                    else:
+                        print("***** USTED HA SIDO BLOQUEADO 60 SEGUNDOS, 5 INTENTOS MAL REALIZADO *****")
+                        time.sleep(60)
         else:
-            print("El detalle del producto no existe en la categoría.")
+            print("\n*********** El detalle del producto no existe en la categoría ************")
     else:
         print("\n******* La categoría no existe *******.")
 
@@ -197,6 +207,7 @@ def forma_pago():
 
 #FUNCION PRINCIPAL TIENDA (MAIN)
 def actividad_tienda():
+    contador=1
     while True:
         print(menu)
         opcion = input("\nSeleccione una opción: ")
@@ -217,7 +228,13 @@ def actividad_tienda():
             else:
                 print("\n***** NO A AGREGADO PRODUCTOS AL CARRITO ******")
         else:
-            print("\n **************** Opción no válida. Intente de nuevo ****************")
+            if contador != 5: 
+                print("\n **************** Opción no válida. Intente de nuevo ****************")
+                contador+=1
+            else:
+                print("***** USTED HA SIDO BLOQUEADO 60 SEGUNDOS, 5 INTENTOS MAL REALIZADO *****")
+                time.sleep(60)
+                contador=1
 
 #INICIO SESION 
 cont=1 
@@ -232,6 +249,7 @@ while True:
         if cont == 5:
             print("\n ********* FIN DEL PROGRAMA A LLEGADO AL MAXIMO INTENTO 5 ***********")
             time.sleep(60)
+            cont=1
         else:
             print(f"Intente la contraseña nuevamente {cont} ")
             cont+=1
