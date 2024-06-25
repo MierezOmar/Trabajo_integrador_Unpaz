@@ -95,7 +95,7 @@ product= ["Camisas","Pantalones","Vestidos","Trajes","Ropa de abrigo","Ropa depo
 carrito = []     
 
 def agregarAlCarrito():
-    print("\n*******CATEGORIAS*******")
+    print("*******CATEGORIAS*******")
     for i in range(len(product)):
         print(f"\n•{product[i]}")
     categoria = input("\nIntroduce la categoría del producto: ").title()
@@ -107,9 +107,10 @@ def agregarAlCarrito():
             precio = productos[categoria]["precios"][indice]
             contador = 1
             while True:
-                cantidad = int(input("\nIntroduce la cantidad que deseas agregar: "))
-                producto_encontrado = False
-                if cantidad > 0:
+                cantidad_validar = input("\nIntroduce la cantidad que deseas agregar: ")
+                if cantidad_validar.isdigit() and int(cantidad_validar) > 0:
+                    cantidad= int(cantidad_validar)
+                    producto_encontrado = False
                     for producto in carrito:
                         if producto['detalle'] == detalle:
                             producto['cantidad'] += cantidad
@@ -117,7 +118,7 @@ def agregarAlCarrito():
                             producto_encontrado = True
                             break
                     if not producto_encontrado:
-                        carrito.append({'detalle': detalle, 'cantidad': cantidad, 'precio': precio})
+                        carrito.append({'detalle': detalle, 'cantidad': cantidad, 'prec': precio})
                         print(f"\nAgregaste {cantidad} de {detalle} al carrito.")
                     for producto in carrito:
                         print(f"\nDetalle: {producto['detalle']}, Cantidad: {producto['cantidad']}, Precio: ${producto['precio']}")
@@ -266,7 +267,7 @@ while True:
         break
     else:
         if cont == 5:
-            print("\n ********* FIN DEL PROGRAMA A LLEGADO AL MAXIMO INTENTO 5 ***********")
+            print("\n ********* A LLEGADO AL MAXIMO INTENTO 5 ***********")
             time.sleep(60)
             cont=1
         else:
