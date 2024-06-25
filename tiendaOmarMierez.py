@@ -1,10 +1,29 @@
 import string
 import random
 import time
-
+import datetime
 
 #GENERAR CONTASEÑA
-dia_semana = input("\nPor favor, ingresa el día de la semana: ").capitalize()
+#dia_semana = input("\nPor favor, ingresa el día de la semana: ").capitalize()
+fecha= datetime.date.today()
+dia= datetime.datetime.today().strftime('%A')
+dia_semana=""
+match dia:
+    case "Monday":
+        dia_semana= "Lunes" 
+    case "Tuesday": 
+        dia_semana= "Martes" 
+    case "Wednesday": 
+        dia_semana= "Miercoles" 
+    case "Thursday": 
+        dia_semana= "Jueves" 
+    case "Friday": 
+        dia_semana= "Viernes" 
+    case "Saturday": 
+        dia_semana= "Sabado" 
+    case "Sunday": 
+        dia_semana= "Domingo" 
+print(f"\n******* {dia_semana} {fecha} *******")
 
 def generarContra(longitud):
     letrasMayus = string.ascii_uppercase
