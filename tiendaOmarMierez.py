@@ -55,7 +55,7 @@ productos = {
 #FUNCION DE LISTAR PRODUCTOS
 def listarProductosYprecios(categoria):
     if categoria in productos:
-        print(f"Productos en la categoría '{categoria}':")
+        print(f"\nProductos en la categoría '{categoria}':")
         for detalle, precio in zip(productos[categoria]["detalles"], productos[categoria]["precios"]):
             print(f"- {detalle}: ${precio}")
     else:
@@ -86,6 +86,7 @@ def agregarAlCarrito():
         if detalle in productos[categoria]["detalles"]:
             indice = productos[categoria]["detalles"].index(detalle)
             precio = productos[categoria]["precios"][indice]
+            contador = 1
             while True:
                 cantidad = int(input("\nIntroduce la cantidad que deseas agregar: "))
                 producto_encontrado = False
@@ -102,7 +103,6 @@ def agregarAlCarrito():
                     for producto in carrito:
                         print(f"\nDetalle: {producto['detalle']}, Cantidad: {producto['cantidad']}, Precio: ${producto['precio']}")
                 else:
-                    contador = 1
                     if contador != 5: 
                         print("\n**** La cantidad debe ser entero positivo ****")
                         contador += 1
