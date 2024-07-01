@@ -262,7 +262,7 @@ while True:
     sesion= input("\nINGRESE CONTRASEÑA PARA INICIAR SESION: ")
 
     if contraGenerada == sesion:
-        print ("\n ********** USTED A INISIADO SESION **********")
+        print ("\n ********** USTED A INICIADO SESION **********")
         actividad_tienda()
         break
     else:
